@@ -9,10 +9,11 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   situation_assessment_msgs
   toaster_msgs
+  tf
 )
 
 ## System dependencies are found with CMake's conventions
-# find_package(Boost REQUIRED COMPONENTS system)
+find_package(Boost REQUIRED COMPONENTS system thread)
 
 
 ## Uncomment this if the package has a setup.py. This macro ensures
@@ -81,9 +82,9 @@ find_package(catkin REQUIRED COMPONENTS
 ## CATKIN_DEPENDS: catkin_packages dependent projects also need
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
-#  INCLUDE_DIRS include
+  INCLUDE_DIRS include
 #  LIBRARIES toaster_bridge
-#  CATKIN_DEPENDS roscpp rospy situation_assessment_msgs toaster_msgs
+  CATKIN_DEPENDS roscpp rospy situation_assessment_msgs toaster_msgs
 #  DEPENDS system_lib
 )
 
@@ -93,9 +94,10 @@ catkin_package(
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
-# include_directories(include)
+ include_directories(include)
 include_directories(
   ${catkin_INCLUDE_DIRS}
+  ${Boost_INCLUDE_DIRS}
 )
 
 ## Declare a cpp library
@@ -104,16 +106,22 @@ include_directories(
 # )
 
 ## Declare a cpp executable
-# add_executable(toaster_bridge_node src/toaster_bridge_node.cpp)
+add_executable(toaster_bridge src/toaster_bridge.cpp src/agent_position_manager.cpp)
+add_executable(toaster_database_bridge src/toaster_database_bridge.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
-# add_dependencies(toaster_bridge_node toaster_bridge_generate_messages_cpp)
+add_dependencies(toaster_bridge situation_assessment_msgs_generate_messages_cpp toaster_msgs_generate_messages_cpp)
+add_dependencies(toaster_database_bridge situation_assessment_msgs_generate_messages_cpp toaster_msgs_generate_messages_cpp)
 
 ## Specify libraries to link a library or executable target against
-# target_link_libraries(toaster_bridge_node
-#   ${catkin_LIBRARIES}
-# )
+ target_link_libraries(toaster_bridge
+   ${catkin_LIBRARIES}
+   ${Boost_LIBRARIES}
+ )
+ target_link_libraries(toaster_database_bridge
+   ${catkin_LIBRARIES}
+ )
 
 #############
 ## Install ##
