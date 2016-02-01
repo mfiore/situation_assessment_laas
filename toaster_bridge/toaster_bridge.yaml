@@ -1,0 +1,8 @@
+---
+toaster_bridge:
+  predicate_list:
+    - isIn
+  target_use:
+    isIn: predicate
+  robot_name: PR2_ROBOT
+  database_xml_path: /home/mfiore/ros_workspaces/hydro_ws/src/situation_assessment_laas/toaster_bridge/saphari_db.xml
