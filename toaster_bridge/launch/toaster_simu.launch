@@ -6,14 +6,17 @@
 	<node name="toaster_simu" pkg="toaster_simu" type="toaster_simu" output="screen" />
 	<node name="toaster_visualizer" pkg="toaster_visualizer" type="toaster_visualizer" output="screen" />    
 	<node name="database" pkg="database_manager" type="run_server" output="screen" />
+
+	<node name="pdg" pkg="pdg" type="pdg" output="screen" />
 	<node name="area_manager" pkg="area_manager" type="area_manager" output="screen" />
+	<node name="agent_monitor" pkg="agent_monitor" type="agent_monitor" output="screen" />
 
 	<node name="set_saphari_simu" pkg="toaster_bridge" type="set_saphari_simu.py" output="screen" />
 	<node name="load_db" pkg="toaster_bridge" type="load_db.py" output="screen" />
 	<node name="toaster_bridge" pkg="toaster_bridge" type="toaster_bridge" output="screen" />
 	<node name="toaster_database_bridge" pkg="toaster_bridge" type="toaster_database_bridge" output="screen" />
 	
-    <node name="map_server_big" pkg="map_server" type="map_server" args="/home/mfiore/ros_workspaces/hydro_ws/src/shary3/common_launch/LAAS-big-v2.yaml"/> 
+    <node name="map_server_big" pkg="map_server" type="map_server" args="/home/mfiore/ros_workspaces/hydro_ws/src/plan_management/common_launch/LAAS-big-v2.yaml"/> 
 
 </launch>
 
